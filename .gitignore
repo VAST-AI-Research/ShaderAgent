@@ -1,0 +1,32 @@
+# secrets
+.env
+APIKEY_*
+config/local*.yaml
+
+# python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+
+# run artifacts
+outputs/
+logs/
+
+# not in this release
+scripts/
+tests/
+
+# the paper ships as a release asset, not in git history
+assets/*.pdf
+
+# weights and user scenes
+*.glb
+*.gltf
+*.exr
+*.safetensors
+*.ckpt
+*.pt

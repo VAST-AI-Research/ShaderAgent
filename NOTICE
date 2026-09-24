@@ -1,0 +1,88 @@
+ShaderAgent — file licenses
+===========================
+
+This repository is **not** under a single license.
+
+  source code (everything except data/)     MIT          LICENSE
+  data/agent_ball.blend                     CC BY-NC-SA 3.0
+  data/agent_plane.blend                    CC BY-NC-SA 3.0
+  data/xmas.png                             project example (AI-generated)
+  data/index.jsonl                          same as source (MIT)
+
+The MatScorer LoRA and its training data live on Hugging Face, not in
+this repository, and carry their own terms (see the end of this file).
+
+Commercial use of the two default `.blend` scenes is **not** granted.
+The code itself remains MIT: point `blender.scene.blend_file` at your
+own preview scene and set `scene.part_name` to the object name.
+
+
+data/xmas.png
+    Generated with an AI image model for this project. Used as the
+    example reference photo.
+
+
+data/agent_ball.blend
+data/agent_plane.blend
+    Blender scenes (material ball and material plane preview stages),
+    derived from b.m.p.s. — Blender Material Preview Scenes v1.5 by
+    Robin Marín (forum handle "tuqueque"), 2009:
+
+        https://blenderartists.org/t/b-m-p-s-1-5/443716
+
+    The upstream release states no license of its own. Blender Artists'
+    Terms of Service place user-posted content under Creative Commons
+    Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0):
+
+        https://creativecommons.org/licenses/by-nc-sa/3.0/
+
+    These two files are therefore made available under CC BY-NC-SA 3.0
+    and are NOT covered by this repository's MIT License. In particular
+    the upstream terms are non-commercial and share-alike, so commercial
+    use of these two scenes is not granted here, and derivatives of them
+    must carry the same license. The MIT terms on the source code are
+    unaffected.
+
+    The pipeline does not depend on these specific scenes. Any .blend
+    file holding a single material-preview object works: point
+    blender.scene.blend_file at it and set scene.part_name to the
+    object name.
+
+    Cite the upstream work as:
+
+        @misc{marin2009bmps,
+          author       = {Robin Mar\'in},
+          title        = {b.m.p.s.: Blender Material Preview Scenes},
+          year         = {2009},
+          howpublished = {\url{https://blenderartists.org/t/b-m-p-s-1-5/443716}}
+        }
+
+
+MatScorer weights and data (downloaded separately)
+    Neither is contained in this repository, and neither is covered by
+    this repository's MIT License.
+
+    Base model, Qwen/Qwen3-VL-Reranker-8B          Apache-2.0
+        https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B
+
+    MatScorer LoRA adapter                          research / non-commercial
+        https://huggingface.co/yuanze1024/ShaderAgent-MatScorer-Qwen3VLReranker-LoRA
+
+        The base model is Apache-2.0, but the adapter is trained on the
+        data below, which mixes several upstream licenses. Treat the
+        adapter as research / non-commercial.
+
+    MatScorer training and evaluation data          mixed; see its NOTICE
+        https://huggingface.co/datasets/yuanze1024/ShaderAgent-MatScorer-Data
+
+        Renders derived from BlenderKit (Royalty Free / CC0 upstream),
+        MatSynth (CC0 with a CC-BY subset) and Tencent Hunyuan 3D objects
+        (Tencent Hunyuan 3D 2.1 Community License, which excludes the EU,
+        the UK and South Korea from its territory). The dataset's own
+        NOTICE gives the terms per directory:
+
+        https://huggingface.co/datasets/yuanze1024/ShaderAgent-MatScorer-Data/blob/main/NOTICE
+
+
+Third-party Python dependencies are installed from PyPI and keep their
+own licenses; see each project's distribution.

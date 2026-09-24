@@ -1,0 +1,57 @@
+# OpenAI-compatible Chat Completions. export OPENAI_API_KEY=...
+# Chat: gpt-6-astra. Texture maps: gpt-image-2.5-flare (same key, Images API).
+pipeline:
+  max_trials: 3          # whole-pipeline retries after a failed trial
+  max_steps: 3           # Designer rewrite / structure-refinement rounds per trial
+  param_tuning_enabled: true
+  dataset_workers: 1
+  dataset_indices_path: data/index.jsonl
+
+blender:
+  executable_path: blender
+  render:
+    engine: CYCLES
+    samples: 512
+    resolution: [512, 512]
+    device: GPU
+    compute_device_type: CUDA   # or OPTIX
+  camera:
+    azimuth_angles: [45]
+    elevation: 20
+  scene:
+    # Hero view for the final PNG. Critic/tuner also render plane + dark_ball internally.
+    blend_file: data/agent_ball.blend
+    render_mode: ball
+    part_name: SolidModel
+
+# One block for every chat/image model. Same three fields on each role.
+models:
+  designer:          {provider: openai_server, model_id: gpt-6-astra, api_base: "https://api.openai.com/v1"}
+  classifier:        {provider: openai_server, model_id: gpt-6-astra, api_base: "https://api.openai.com/v1"}
+  critic:            {provider: openai_server, model_id: gpt-6-astra, api_base: "https://api.openai.com/v1"}
+  inspector:         {provider: openai_server, model_id: gpt-6-astra, api_base: "https://api.openai.com/v1"}
+  prompt_enricher:   {provider: openai_server, model_id: gpt-6-astra, api_base: "https://api.openai.com/v1"}
+  texture_generator: {provider: openai_server, model_id: gpt-image-2.5-flare, api_base: "https://api.openai.com/v1"}
+
+image_metrics:
+  model_path: Qwen/Qwen3-VL-Reranker-8B
+  adapter_path: yuanze1024/ShaderAgent-MatScorer-Qwen3VLReranker-LoRA
+  device: cuda
+  dtype: bfloat16
+  merge_lora: true
+
+param_tuning:
+  max_iter: 50           # numeric search steps per structure step
+  max_params: 5
+  seed: 42
+  accept_prob: 0.05      # chance to keep a worse candidate
+  momentum: 0.0
+  log_range: 2.3         # log-uniform scale: exp(±log_range)
+  color_sv_perturb: 0.2  # HSV S/V step
+  hue_perturb: 0.15      # 0 keeps hue fixed
+  bool_flip_prob: 0.2
+  render_samples: 256
+  render_resolution: 256
+
+critic:
+  good_enough_min: 0.8   # winner must clear this on every rubric dimension to stop

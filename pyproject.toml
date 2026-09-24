@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shader-agent"
+version = "0.1.0"
+description = "Shader graph generation and refinement pipeline."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE", "NOTICE"]
+requires-python = ">=3.10"
+dependencies = [
+  "anthropic>=0.40.0",
+  "google-genai>=1.61.0",
+  "numpy>=2.2.6",
+  "omegaconf>=2.3.0",
+  "openai>=1.0.0",
+  "pillow>=10.0.1",
+  "pyyaml>=6.0.0",
+  "requests>=2.32.3",
+  "torch>=2.0.0",
+  "transformers>=4.57.3",
+  "peft>=0.17.0",
+  "accelerate>=1.10.0",
+  "mcp>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/VAST-AI-Research/ShaderAgent"
+Repository = "https://github.com/VAST-AI-Research/ShaderAgent"
+
+[project.scripts]
+shader-agent = "shader_agent.cli:main"
+shader-agent-batch = "shader_agent.batch:main"
+shader-agent-mcp = "shader_agent.mcp:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
