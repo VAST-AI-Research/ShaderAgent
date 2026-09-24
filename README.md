@@ -203,10 +203,10 @@ python -m shader_agent.mcp    # stdio MCP: validate_dsl, render_dsl
 ## Citation
 
 ```bibtex
-@article{yuan2026shaderagent,
+@inproceedings{yuan2026shaderagent,
   title     = {ShaderAgent: Self-Evolving Agentic Procedural Material Generation},
   author    = {Yuan, Ze and Chen, Chia-hao and Zhang, Yuqing and Cao, Yan-Pei and Liang, Ding and Qi, Xiaojuan},
-  journal   = {ACM Transactions on Graphics},
+  booktitle = {SIGGRAPH Asia 2026 Conference Papers},
   year      = {2026},
   publisher = {ACM},
   doi       = {10.1145/3829340.3842164}
